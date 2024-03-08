@@ -1,26 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Hello vue {{ username }}</h1>
+  <h1 v-text="username"></h1>
+  <!-- Object 형태로 출력 -->
+  <p>{{ user }}</p>
+  <!-- Object에서 name꺼내서 출력 -->
+  <p>{{ user.name }}</p>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      username: "scalper",
+      year: 2021,
+      user: {
+        name: "scalper",
+        job: "programmer",
+        age: 100,
+      },
+    };
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
