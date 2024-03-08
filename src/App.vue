@@ -13,6 +13,8 @@
   <p>{{ button }}</p>
   <!--태그 적용되고 노출-->
   <p v-html="button"></p>
+  <!--태그 적용되고 외부에서 쓸때 주의해서 사용 (악용)-->
+  <p v-html="button2"></p>
 </template>
 
 <script>
@@ -28,6 +30,7 @@ export default {
         age: 100,
       },
       button: "<button>click!!</button>",
+      button2: `<button onclick='alert("hack")'>click!!</button>`,
     };
   },
 };
