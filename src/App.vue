@@ -1,60 +1,54 @@
 <template>
   <div>
-    <!-- data 2가지를 배열로 담아 스타일 2개 적용 -->
-    <h1 v-bind:style="[titleStyle, basicStyle]">Hello Title</h1>
+    <h1>Hello vue</h1>
+    <h2 class="line-through">line-through</h2>
+    <h2 v-bind:class="textDecoration" class="text-red">line-through</h2>
 
-    <!-- dyanamicId를 이용해서 id를 바꿔 css를 적용시킨다-->
-    <h1 v-bind:id="dynamicId">Hello Title</h1>
+    <!-- :으로 v-bind 줄여 쓸수 있음 조건에 따라-->
+    <!--
+      조건 ? 참일경우 : 아닐경우
+      isDone값이 참이면 line-through를 class적용 거짓이면 highlight적용
+    -->
+    <h2 :class="isDone === false ? 'line-through' : 'highlight'">
+      line-through
+    </h2>
 
-    <!-- dyanamicId를 이용해서 data에 설정한 url로 이동시킨다-->
-    <a v-bind:href="url">naver</a>
+    <!-- 클래스명: 조건 으로 적용시키기 object형태로 여러 조건을 적용시킬 수 있다-->
+    <h2
+      :class="{ highlight: isDone == true, 'text-red': username === 'scalper' }"
+    >
+      Object 형태의 동적 클래스
+    </h2>
 
-    <!-- object 사용해서 binding -->
-    <img v-bind:src="image.src" v-bind:alt="image.alt" />
-    <input v-bind:type="inputType" name="" id="" />
-
-    <!-- data 이용해서 style 적용 -->
-    <p v-bind:style="pStyle">Hello Vue!</p>
-    <!-- inline style 적용 적용 -->
-    <p v-bind:style="{ color: 'red', fontSize: `${basicSize}px` }">
-      Hello Vue!
-    </p>
+    <!-- 조건에따라 3항연산자 하나 선택, text-red는 기본 적용  -->
+    <h2 :class="[isDone === true ? 'line-through' : 'highlihgt', 'text-red']">
+      Array 형태의 동적 클래스 부여
+    </h2>
   </div>
 </template>
-p
+
 <script>
 export default {
   name: "App",
   data() {
     return {
-      dynamicId: "content",
-      url: "https://naver.com",
-      image: {
-        src: "https://placeimg.com/640/480/any",
-        alt: "random image",
-      },
-      inputType: "color",
-      pStyle: "color: red;",
-      basicSize: 50,
-      basicStyle: {
-        backgroundColor: "yellow",
-      },
-      titleStyle: {
-        "font-weight": "bold",
-        fontSize: "50px",
-        border: "1px solid red",
-      },
+      username: "scalper",
+      isDone: true,
+      textDecoration: "line-through",
     };
   },
 };
 </script>
 
 <style>
-#title {
+.text-red {
   color: red;
 }
-#content {
-  color: blue;
-  background-color: pink;
+.highlight {
+  font-weight: bold;
+  background: pink;
+}
+.line-through {
+  text-decoration: line-through;
 }
 </style>
