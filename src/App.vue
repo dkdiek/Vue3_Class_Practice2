@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Hello</h1>
-    <h1 id="title">Hello Title</h1>
+    <!-- data 2가지를 배열로 담아 스타일 2개 적용 -->
+    <h1 v-bind:style="[titleStyle, basicStyle]">Hello Title</h1>
 
     <!-- dyanamicId를 이용해서 id를 바꿔 css를 적용시킨다-->
     <h1 v-bind:id="dynamicId">Hello Title</h1>
@@ -12,6 +12,13 @@
     <!-- object 사용해서 binding -->
     <img v-bind:src="image.src" v-bind:alt="image.alt" />
     <input v-bind:type="inputType" name="" id="" />
+
+    <!-- data 이용해서 style 적용 -->
+    <p v-bind:style="pStyle">Hello Vue!</p>
+    <!-- inline style 적용 적용 -->
+    <p v-bind:style="{ color: 'red', fontSize: `${basicSize}px` }">
+      Hello Vue!
+    </p>
   </div>
 </template>
 p
@@ -27,6 +34,16 @@ export default {
         alt: "random image",
       },
       inputType: "color",
+      pStyle: "color: red;",
+      basicSize: 50,
+      basicStyle: {
+        backgroundColor: "yellow",
+      },
+      titleStyle: {
+        "font-weight": "bold",
+        fontSize: "50px",
+        border: "1px solid red",
+      },
     };
   },
 };
