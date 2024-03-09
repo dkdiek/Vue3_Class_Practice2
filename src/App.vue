@@ -1,27 +1,27 @@
 <template>
   <div>
-    <h2>Hello Component</h2>
-    <button @click="displayDetail = true">show modal</button>
-    <!-- 자식으로 부터 emit이벤트를 받을때 @로 받는다 closeDetail을 받으면 부모에서 정의한 close 메소드를 실행 -->
-    <DetailView
-      v-if="displayDetail"
-      @closeDetail="close"
-      @sendData="showData"
-    />
+    <h2>Hello provide, inject, dynamic component</h2>
+    <CompLevel1 />
   </div>
 </template>
 
 <script>
-import DetailView from "./components/DetailView.vue";
+import CompLevel1 from "./components/provide-inject/CompLevel1";
 //
 export default {
   name: "App",
   components: {
-    DetailView,
+    CompLevel1,
   },
   data() {
     return {
-      displayDetail: false,
+      username: "scalper",
+    };
+  },
+  //provide 정의 메소드 형태로 complevel3에서 값 바로 꺼낼 수 있도록
+  provide() {
+    return {
+      name: this.username,
     };
   },
   //컴퓨티드 정의
@@ -31,14 +31,7 @@ export default {
   //디렉티브 정의
   directives: {},
   //메소드 정의
-  methods: {
-    close() {
-      this.displayDetail = false;
-    },
-    showData(data) {
-      console.log(data, "data sent");
-    },
-  },
+  methods: {},
 };
 </script>
 
