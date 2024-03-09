@@ -1,54 +1,36 @@
 <template>
   <div>
-    <!--컴포넌트 불러오기3 username과 같이 prop으로 컴포넌트에 데이터를 넘겨 처리 !!!직접 값 넣지 말고 method등으로 보낼것
-    :을 앞에 추가하면 data나 computed 쪽에서 선언된 데이터를 넘겨야함
-    -->
-    <GreetingUser
-      :username="username"
-      :numberOfVisit="numberOfVisit"
-      :siteInfo="siteInfo"
-    />
-
-    <GreetingUser />
-    <button @click="changeName()">변경</button>
+    <ProductList :products="products" />
   </div>
 </template>
 
 <script>
-//컴포넌트 가져오기1
-import GreetingUser from "./components/GreetingUser";
+import ProductList from "./components/ProductList";
 //
 export default {
   name: "App",
-  //컴포넌트 가져오기2
   components: {
-    //GreetingUser: GreetingUser ES6에서 키와 밸류가 같으면 생략가능
-    GreetingUser,
+    ProductList,
   },
   data() {
     return {
-      username: "scalper",
-      numberOfVisit: undefined,
-      siteInfo: {
-        name: "vue practice",
-        teacher: "scalper",
-        subject: "frontend",
-      },
+      products: [
+        { id: 0, name: "TV", price: 500000, company: "LG" },
+        { id: 1, name: "전자레인지", price: 200000, company: "삼성" },
+        { id: 2, name: "가스오븐", price: 300000, company: "한화" },
+        { id: 3, name: "냉장고", price: 50000, company: "대우" },
+        { id: 4, name: "에어컨", price: 100000, company: "해태" },
+      ],
     };
   },
   //컴퓨티드 정의
   computed: {},
   //watch 정의
   watch: {},
-
   //디렉티브 정의
   directives: {},
   //메소드 정의
-  methods: {
-    changeName() {
-      this.username = "DDOchi";
-    },
-  },
+  methods: {},
 };
 </script>
 
