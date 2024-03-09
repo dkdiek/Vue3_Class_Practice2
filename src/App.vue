@@ -1,14 +1,15 @@
 <template>
   <div>
-    <h1>computed</h1>
-    <h2>{{ address }}</h2>
-    <!-- 컴퓨티드 - 필요한 값들이 캐시가 된다 변화가 해당 값들의 변화가 일어나기 전에는 계산 다시 안함 -->
-    <h2>내가받은 점수의 합 {{ sumGrade }}</h2>
-    <!-- 메소드 - 어떠한 변화가 있을 때마다 계산을 다시 수행 -->
-    <h2>내가받은 점수의 합 {{ getTotalScore() }}</h2>
-    <!-- 영어점수 변경 시 둘다 다시 계산, 학생 이름 변경 시 메소드만 다시 계산 -->
-    영어점수<input type="text" name="" id="" v-model="grade.eng" />
-    학생이름<input type="text" name="" id="" v-model="studentName" />
+    <h1>watchers</h1>
+    <h2>current money: {{ money }}</h2>
+    <div>
+      <button @click="money += 100">earn money</button>
+      <button @click="money -= 100">spend money</button>
+    </div>
+    <h2>{{ receipt }}</h2>
+    <button @click="receipt.food += 500">buy food</button>
+    <hr />
+    <input type="text" name="" id="" v-model="userName" />
   </div>
 </template>
 
@@ -18,40 +19,46 @@ export default {
   data() {
     return {
       userName: "scalper",
-      addres1: "성남시",
-      addres2: "분당구",
-      addres3: "정자로",
-      grade: {
-        math: 70,
-        kor: 90,
-        eng: 50,
-        sci: 55,
+      money: 0,
+      receipt: {
+        food: 3000,
+        fee: 2000,
+        fare: 10000,
       },
-      studentName: "11",
     };
   },
   //컴퓨티드 정의
-  computed: {
-    address() {
-      return `${this.addres1} - ${this.addres2} - ${this.addres3}`;
+  computed: {},
+  //watch 정의
+  watch: {
+    userName: {
+      handler(newValue) {
+        console.log(newValue, "newValue");
+      },
+      //immediate를 true로 하면 최초 로딩 시에도 watch를 감지한다 (원래는 로딩 후 변화 있을때만 감지)
+      immediate: true,
     },
-    sumGrade() {
-      //배열 디스트럭처링 grade 요소를 변수처럼 사용
-      console.log("computed 실행");
-      const { math, kor, eng, sci } = this.grade;
-      return math + kor + eng + sci;
+    //object 안의 세부 내용 감지는(object 형태)로 작성 deep을 true로 줘야함
+    receipt: {
+      handler(newValue) {
+        console.log("영수증의 값 변화", newValue);
+      },
+      deep: true,
+    },
+    //watch로 money 변화 감지(메소드 형태)
+    money(newValue, oldValue) {
+      if (newValue > 2000 && newValue > oldValue) {
+        console.log("mission complete");
+      }
+      if (oldValue < 1500 && newValue < oldValue) {
+        console.log("warning");
+      }
     },
   },
   //디렉티브 정의
   directives: {},
   //메소드 정의
-  methods: {
-    getTotalScore() {
-      console.log("method 실행");
-      const { math, kor, eng, sci } = this.grade;
-      return math + kor + eng + sci;
-    },
-  },
+  methods: {},
 };
 </script>
 
