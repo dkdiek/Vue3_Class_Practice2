@@ -1,31 +1,22 @@
 <template>
+  <!-- 배열 바로 꺼내면 [ "banana", "strawberry", "apple", "melon" ] -->
   <div>
-    <!--if 조건에 따라 보여지고 안보여짐 false면 v-else가 출력됨 -->
-    <h2 v-if="showName">My name is {{ user.name }}</h2>
-    <h2 v-else>이름을 보여줄 수 없습니다.</h2>
+    {{ fruits }}
 
-    <!-- if문, else-if, else 중간에 다른 태그가 들어가면 안되고 이어져야 된다 -->
-    <h2 v-if="user.age > 20">당신은 성인입니다.</h2>
-    <h2 v-else-if="user.age > 14 && user.age < 20">청소년입니다.</h2>
-    <h2 v-else>아이입니다.</h2>
-
-    <!-- false일 때 v-if는 아예 렌더링을 안하고 v-show는 style을 none으로 설정 -->
-    <h2 v-if="showName">{{ user.name }} IF</h2>
-    <h2 v-show="showName">{{ user.name }} show</h2>
-
-    <!--template으로 여러개 묶어서 조건 적용 - template은 html에 태그로 노출 안된다-->
-    <ul>
-      <template v-if="question === 'frontend'">
-        <li>HTML은 재미있나요?</li>
-        <li>css은 재미있나요?</li>
-        <li>js는 재미있나요?</li>
-      </template>
-      <template v-else>
-        <li>java는 재미있나요?</li>
-        <li>python는 재미있나요?</li>
-        <li>C#는 재미있나요?</li>
-      </template>
-    </ul>
+    <!-- 배열,object를 v-for로 꺼내기 v-for-"변수 in 또는 of 배열" :key="키값" (fruit,index)로 써서 index를 받을 수 있음 -->
+    <div>
+      <ul>
+        <li v-for="(fruit, index) in fruits" :key="index">
+          {{ index + 1 }}. {{ fruit }}
+        </li>
+      </ul>
+      <!-- object v-for로 꺼내기 -->
+      <h2 v-for="(value, key, index) in user" :key="key">
+        {{ index }}. {{ key }}={{ value }}
+      </h2>
+      <!-- 숫자도 반복 시킬 수 있다-->
+      <p v-for="n in 10" :key="n">{{ n }}</p>
+    </div>
   </div>
 </template>
 
@@ -34,11 +25,10 @@ export default {
   name: "App",
   data() {
     return {
-      question: "frontend",
-      showName: true,
+      fruits: ["banana", "strawberry", "apple", "melon"],
       user: {
         name: "scalper",
-        age: 1,
+        age: 100,
         job: "programmer",
       },
     };
