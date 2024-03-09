@@ -1,38 +1,8 @@
 <template>
-  <!--리스트 렌더링 중첩 반복문-->
-
   <div>
-    <!-- 방법 1-->
-    <!-- cities 중 province가 경상도인 object를 js filter를 이용해서 반복 출력 v-for와 v-if를 엘리멘트에서 같이 사용 불가
-    조건문에 해당 안되면 li자체가 생성x
-    <ul>
-      <li
-        v-for="(city, index) in cities.filter((c) => c.province === '경상도')"
-        :key="index"
-      >
-        {{ city.name }}
-      </li>
-    </ul> -->
-
-    <!-- 방법2 -->
-    <!--cities 중 province가 경상도인 object를 js filter를 이용해서 반복 출력 v-for와 v-if를 엘리멘트에서 같이 사용 불가
-    조건문에 해당안되도 li는 생성되고 값만 화면에 출력안됨 marker는 화면에 노출된다
-    
-    <ul>
-      <li v-for="(city, index) in cities" :key="index">
-        <span v-if="city.province === '경상도'">{{ city.name }}</span>
-      </li>
-    </ul>-->
-
-    <!-- 방법3 -->
-    <!-- template을 만들어 v-for 껍데기 사용 -->
-    <ul>
-      <template v-for="(city, index) in cities" :key="index">
-        <li v-if="city.province === '경상도'">
-          {{ city.name }}
-        </li>
-      </template>
-    </ul>
+    <h2>5년뒤 나이 : {{ add(5) }}</h2>
+    <h2>동급의 10명이 있다면 나이의 총 합은 {{ multiply(age, 20) }}</h2>
+    <h2>제곱 구하기{{ getTotalScore(100) }}</h2>
   </div>
 </template>
 
@@ -41,15 +11,29 @@ export default {
   name: "App",
   data() {
     return {
-      cities: [
-        { name: "서울", province: "경기도" },
-        { name: "대전", province: "충청도" },
-        { name: "대구", province: "경상도" },
-        { name: "부산", province: "경상도" },
-        { name: "인천", province: "전라도" },
-        { name: "광주", province: "경기도" },
-      ],
+      age: 30,
     };
+  },
+  //메소드 정의
+  methods: {
+    // 몇 년 후 나이 계산
+    add(num) {
+      //data에서 정의한 age에 접근하려면 this를 사용 this 즉 객체를 가리킨다
+      return this.age + num;
+    },
+    /*  
+   화살표 함수는 this 컨텍스트 생성 X 한단계 밖이 this가 되기 때문에 age 접근하려면 일반 함수 사용 필요
+   add(num) => {
+      return age + num;
+    }, */
+    // 동급 명수 별 나이 총 합 계산
+    // es6 추가 문법 num 값이 안들어오면 기본 값 10 설정
+    multiply(age, num = 10) {
+      return age * num;
+    },
+    getTotalScore(num) {
+      return this.multiply(num * num);
+    },
   },
 };
 </script>
