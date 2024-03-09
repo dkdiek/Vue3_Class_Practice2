@@ -1,6 +1,11 @@
 <template>
   <div>
+    <!-- String 받기 -->
     <h2>Hello user!! {{ username }}</h2>
+    <!-- number 받기 -->
+    <h3>오늘이 {{ numberOfVisit }} 번째 방문입니다.</h3>
+    <!-- object 받기 -->
+    <h3>사이트 이름은 {{ siteInfo.name }}입니다</h3>
   </div>
 </template>
 
@@ -15,6 +20,17 @@ export default {
     username: {
       type: String,
       default: "user",
+    },
+    numberOfVisit: {
+      type: Number,
+      default: 0,
+    },
+    siteInfo: {
+      type: Object,
+      //object는 return 형식으로 기본값 설정
+      default: () => {
+        return { name: "-", teacher: "-" };
+      },
     },
   },
 };

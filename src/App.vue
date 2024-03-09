@@ -3,10 +3,12 @@
     <!--컴포넌트 불러오기3 username과 같이 prop으로 컴포넌트에 데이터를 넘겨 처리 !!!직접 값 넣지 말고 method등으로 보낼것
     :을 앞에 추가하면 data나 computed 쪽에서 선언된 데이터를 넘겨야함
     -->
-    <GreetingUser :username="username" />
-    <GreetingUser username="dooli" />
-    <GreetingUser username="pororo" />
-    <GreetingUser username="monkey" />
+    <GreetingUser
+      :username="username"
+      :numberOfVisit="numberOfVisit"
+      :siteInfo="siteInfo"
+    />
+
     <GreetingUser />
     <button @click="changeName()">변경</button>
   </div>
@@ -26,6 +28,12 @@ export default {
   data() {
     return {
       username: "scalper",
+      numberOfVisit: undefined,
+      siteInfo: {
+        name: "vue practice",
+        teacher: "scalper",
+        subject: "frontend",
+      },
     };
   },
   //컴퓨티드 정의
